@@ -110,53 +110,73 @@
 
 
 
-    </br></br>
-    <div class="section">
-        <s2>Performance</s2>
-      
-        <p class="paragraph-3 nerf_text">
-            Note that, unlike concurrent works <a href="https://alexyu.net/plenoxels/"> Plenoxels</a>
-            and  <a href="https://nvlabs.github.io/instant-ngp/"> Instant-ngp</a>
-            that require customized CUDA kernels, our model’s
-            efficiency gains are obtained using a standard PyTorch implementation.
-        </p>
+     </br></br>
+        <div class="section">
+            <s2>Performance</s2>
 
-        <h2 class="grey-heading_nerf">
-            Main Results
-        </h2>
-        <p class="paragraph-3 nerf_text">
-            
-        </p>
+            <p class="paragraph-3 nerf_text">
+                As shown in the tables below, we compare TempCD with state-of-the-art methods on four benchmarks. CoTDet
+                consistently outperforms state-of-the-art methods on all tasks.
+            </p>
 
-        <div class="columns-5 w-row">
-            <img src="img/performance.png" style="width:100%; margin-right:0px; margin-top:0px;">
-        </div>
+            <h2 class="grey-heading_nerf">
+                Main Results
+            </h2>
+            <p class="paragraph-3 nerf_text">
+                Compared to TOIST, our CoTDet achieves significant performance improvement (15.6% mAPbox and 14.8% mAPmask), which
+                demonstrates the effectiveness of our task-relevant knowledge acquisition and utilization. Compared to the two-stage
+                method GGNN, we achieve 24.3% mAPbox and 21.2% mAPmask performance gain, which demonstrates the importance of leveraging
+                the visual affordance knowledge rather than purely visual context information.
+            </p>
+            <div class="columns-5 w-row">
+                <img src="img/table1.png" style="width:95%; margin-right:0px; margin-top:10px;">
+            </div>
+            <p class="paragraph-3 nerf_text">
+            Our CoTDet significantly improves the detection and segmentation performance on task4 (get potatoes out of fire), task6
+            (get lemon out of tea) and task7 (dig hole), achieving approximately 20% mAP improvement on both benchmarks. These tasks
+            face the common challenge of the wide variety of targets’ categories and visual appearances, which is hardly dealt with
+            by methods like [19, 41] that merely learn the mapping between tasks and objects’ categories and visual features. In
+            contrast, our method explicitly acquires the visual affordance knowledge of tasks to detect rare objects and avoid
+            overfitting to common objects, outperforming significantly in these tasks. In addition, for those less challenging tasks
+            with a few ground-truth object categories, we still achieve approximately 8% mAP improvement, demonstrating the
+            effectiveness of conditioning on visual affordances to object localization.
+            </p>
+            <div class="columns-5 w-row">
+                <img src="img/table2.png" style="width:95%; margin-right:0px; margin-top:10px;">
+            </div>
+
+            <h2 class="grey-heading_nerf">
+                Visualization
+            </h2>
+            <p class="paragraph-3 nerf_text">
+                Here we visualize. For (a), no objects in the image should
+                be selected to “get lemon out of tea”. Our model can successfully return the empty set, while TOIST detects the french
+                fry that is one of the salient objects in the image as the tool. Similarly, as knives are uncommon for “opening bottle
+                of beer”, the knife in (b) is challenging for TOIST to identify and locate. Guided by the visual affordance of “sharp
+                blade with a pointed end”, our model correctly localizes and selects the sharp knife.
+            </p>
+            <div class="columns-5 w-row">
+                <img src="img/vz.png" style="width:95%; margin-right:0px; margin-top:10px;">
+            </div>
+
+            <p class="paragraph-3 nerf_text nerf_results_text">
+                The (c) and (d) demonstrate effectiveness without MLCOT or knowledge-conditional denoising training (KDN). With visual
+                affordance knowledge obtained by directly asking LLMs, our model relies solely on matching with the single knowledge
+                unit, which incorrectly detects the trunk in (c) and misses the knife in (d). The former trunk is easily confused with
+                objects that are “flat, broad with a handle”, while the latter knife is ignored because its visual attributes of
+                straight mismatch the single knowledge unit that includes “curved or angled”. Furthermore, without KDN, our detector
+                lacks explicit guidance, leading to inaccurate detection in challenging scenes. Specifically, the glove in (c) and the
+                knife in (d) are not detected successfully, and the packing line in (d) is mistakenly detected.
+            </p>
 
 
-        <h2 class="grey-heading_nerf">
-            Visualization
-        </h2>
-        <p class="paragraph-3 nerf_text">
-            Here we visualize 
-        </p>
-        <div class="columns-5 w-row">
-            <img src="img/vz1.jpg" style="width:100%; margin-right:0px; margin-top:0px;">
-        </div>
-
-        <p class="paragraph-3 nerf_text nerf_results_text">
-            We can also 
-        </p>
-        <div class="columns-5 w-row">
-            <img src="img/vz2.jpg" style="width:100%; margin-right:0px; margin-top:0px;">
-        </div>
-
-
-        </br></br></br>
-        <s2> Acknowledgements </s2>
-        <hr>
-        <p class="paragraph-3 nerf_text">
-            We would like to thank .
-        </p>
+<!-- 
+            </br></br></br>
+            <s2> Acknowledgements </s2>
+            <hr>
+            <p class="paragraph-3 nerf_text">
+                We would like to thank .
+            </p> -->
 
         </br></br>
 <!--    <div class="section">-->

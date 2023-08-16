@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Jiajin Tang,
+                                Ge Zheng,
+                                Sibei Yang">
+
+    <title>Temporal Collection and Distribution for Referring Video Object Segmentation</title>
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+    <link rel="icon" href="img/tensorf_logo.ico" type="image/x-ico">
+
+
+
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container"></div>
+        <h1 class="nerf_title_v2">TempCD</h1>
+        <!--    <h2 class="nerf_title_v2">Tensorial Radiance Fields</h2>-->
+        <h1 class="nerf_subheader_v2">Temporal Collection and Distribution for Referring Video Object Segmentation</h1>
+        <!--    <h2>TensoRF: Tensorial Radiance Fields</h2>-->
+        <h3 class="nerf_subheader_v2">Accepted by ICCV 2023</h3>
+        <!--            <p class="abstract">A compact and efficent scene representation</p>-->
+        <hr>
+        <p class="authors">
+            <a href="https://Toneyaya.github.io/"> Jiajin Tang</a>,
+            <a> Ge Zheng</a>,
+            <a href="https://faculty.sist.shanghaitech.edu.cn/"> Sibei Yang✉</a>
+
+        </p>
+
+
+        </br></br>
+        <div class="btn-group" role="group" aria-label="Top menu">
+            <a class="btn btn-primary" href="https://arxiv.org/abs/">Paper</a>
+            <a class="btn btn-primary" href="https://github.com/Toneyaya/TempCD">Code (Coming Soon)</a>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="w-container">
+            <h2 class="grey-heading_nerf">Our insights</h2>
+            </br></br>
+            <div class="vcontainer" style="text-align: center;">
+                <img width=75% height=75% center src="./img/intro.png"
+                    alt="Dask Driven Object Detection with visual affordance knowledge">
+            </div>
+        </div>
+        </br></br></br></br></br>
+        <!--<hr>-->
+        <div data-anchor="slide1" class="section nerf_section">
+            <div class="grey_container w-container">
+                <h2 class="grey-heading_nerf">
+                    Abstract
+                </h2>
+                <p class="paragraph-3 nerf_text">
+                    Referring video object segmentation aims to segment a referent throughout a video sequence according
+                    to a natural
+                    language expression. It requires aligning the natural language expression with the objects’ motions
+                    and their dynamic
+                    associations at the global video level but segmenting objects at the frame level. To achieve this
+                    goal, we propose
+                    to simultaneously maintain a global referent token and a sequence of object queries, where the
+                    former is responsible for
+                    capturing video-level referent according to the language expression, while the latter serves to
+                    better locate the
+                    temporal collection mechanism collects global information for the referent token from object queries
+                    to the temporal
+                    motions to the language expression. In turn, the temporal distribution first distributes the
+                    referent token to the
+                    referent sequence across all frames and then performs efficient cross-frame reasoning between the
+                    referent sequence and
+                    object queries in every frame. Experimental results show that our method outperforms
+                    state-of-the-art methods on all
+                    benchmarks consistently and significantly.
+                </p>
+
+                <h2 class="grey-heading_nerf">
+                    Method
+                </h2>
+                <p class="paragraph-3 nerf_text">
+                    We introduce a sequence of object queries to capture object information in every frame independently
+                    and maintain a
+                    referent token to capture the global referent information for aligning with language expression. The
+                    referent token and
+                    object queries are alternately updated to stepwise identify the target object and better segment the
+                    target object in
+                    every frame through the proposed temporal collection and distribution mechanisms.
+                </p>
+
+
+                <div class="columns-5 w-row">
+                    <img src="img/tempcd.png" style="width:95%; margin-right:0px; margin-top:10px;">
+                </div>
+
+                <p class="paragraph-3 nerf_text">
+                    Specifically, we first introduce encoders and the definition of object queries. Then, we
+                    present the temporal collection that collects the referent information for the referent token from
+                    object queries to
+                    temporal object motions to the language expression. Next, we introduce the temporal
+                    distribution mechanism that distributes the global referent information to the referent sequence
+                    across frames to object
+                    queries in each frame. The collection-distribution mechanism explicitly captures object
+                    motions and spatial-temporal cross-modal reasoning over objects. Finally, we introduce segmentation
+                    heads and loss
+                    functions. Note that as we explicitly maintain the referent token, we can directly identify the
+                    referent object in each frame without requiring for sequence matching as in previous queries-based
+                    methods.
+                </p>
+            </div>
+        </div>
+
+
+
+        </br></br>
+        <div class="section">
+            <s2>Performance</s2>
+
+            <p class="paragraph-3 nerf_text">
+                As shown in the tables below, we compare TempCD with state-of-the-art methods on four benchmarks. TempCD
+                consistently outperforms state-of-the-art methods on all datasets.
+            </p>
+
+            <h2 class="grey-heading_nerf">
+                Main Results
+            </h2>
+            <p class="paragraph-3 nerf_text">
+                With a standard ResNet-50 visual backbone, our model exhibits improvements of 2.7%, 4%, and 3.4% for the
+                J, F, and J&F
+                metrics, respectively, on the Ref-YoutubeVOS dataset. Employing the advanced temporal visual backbone,
+                Video-Swin-B, our approach consistently outperforms the previous state-of-the-art model on the
+                Ref-Davis-2017 dataset, achieving a 3.5% increase across the aforementioned metrics.
+            </p>
+            <div class="columns-5 w-row">
+                <img src="img/table1.png" style="width:95%; margin-right:0px; margin-top:10px;">
+            </div>
+            <p class="paragraph-3 nerf_text">
+                As presented in Table, our approach yields mean improvements of 6.2% in Overall IoU and 5.2% in Mean
+                IoU, surpassing the predominant state-of-the-art method for these two datasets. In contrast to
+                Ref-Youtube-VOS, these datasets predominantly comprise segmentation annotations for keyframes that
+                encapsulate actions.
+            </p>
+            <div class="columns-5 w-row">
+                <img src="img/table2.png" style="width:95%; margin-right:0px; margin-top:10px;">
+            </div>
+
+            <h2 class="grey-heading_nerf">
+                Visualization
+            </h2>
+            <p class="paragraph-3 nerf_text">
+                Here we visualize. The referring expression in (a) describes the motion of a white duck, a pivotal feature that
+                distinguishes it from similar ducks. Our proposed TempCD effectively captures the motion of the referent which is
+                aligned with the language expression and enables accurate localization and segmentation of the specific duck.
+            </p>
+            <div class="columns-5 w-row">
+                <img src="img/vz.png" style="width:95%; margin-right:0px; margin-top:10px;">
+            </div>
+
+            <p class="paragraph-3 nerf_text nerf_results_text">
+                In the instance of (b), the deer's corresponding action appears in certain frames but lacks uniform presence. Our
+                approach successfully captures its global semantics including motions and aligns it seamlessly with the referring
+                expression, bridging the gap between local semantics and the referring expression via the Collection and Distribution
+                mechanisms. All these observations collectively underscore the value of temporal interaction in fostering refined
+                segmentation across frames.
+                Besides, (c) illustrates that our method can still precisely locate and segment referent objects in complex scenes. The
+                second frame presents a scenario of occlusion, wherein the referent is obscured by another bicycle. Our approach detects
+                the lack of correspondence between visible entities in a frame and the specified referent sequence, facilitated by
+                cross-frame interactions between the visible objects and those delineated by the referent sequence.
+            </p>
+
+
+<!-- 
+            </br></br></br>
+            <s2> Acknowledgements </s2>
+            <hr>
+            <p class="paragraph-3 nerf_text">
+                We would like to thank .
+            </p> -->
+
+            </br></br>
+            <!--    <div class="section">-->
+            <s2>Bibtex</s2>
+            <hr>
+            <div class="bibtexsection">
+                @INPROCEEDINGS{TangICCV2023,
+                author = {Jiajin Tang and Ge Zheng and Jingyi Yu and Sibei Yang},
+                title = {CoTDet: Affordance Knowledge Prompting for Task Driven Object Detection},
+                booktitle = {ICCV},
+                year = {2023}
+                }
+            </div>
+            <!--    </div>-->
+        </div>
+        <hr>
+
+        <footer>
+            <p>This website is partially borrowed from NeRF.
+            </p>
+        </footer>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=51e0d73d83d06baa7a00000f"
+        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <script src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/js/webflow.fd6c33218.js"
+        type="text/javascript"></script>
+
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+
+</body>
+
+</html>
